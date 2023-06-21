@@ -12,7 +12,7 @@ module.exports={
     /** "entry"
      * the entry point
      */
-    entry: "./index.js",
+    entry: path.join(__dirname, '/src/index.js'),
     output: {
         /** "path"
          * the folder path of the output file
@@ -50,7 +50,8 @@ module.exports={
         /** "liveReload"
          * disable live reload on the browser. "hot" must be set to false for this to work
         */
-        liveReload: true
+        liveReload: true,
+        historyApiFallback: true,
     },
     resolve: {
         /** "extensions"
@@ -72,7 +73,11 @@ module.exports={
                 test: /\.(js|jsx)$/,    //kind of file extension this rule should look for and apply in test
                 exclude: /node_modules/, //folder to be excluded
                 use:  'babel-loader' //loader which we are going to use
-            }
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
         ]
     }
 }
